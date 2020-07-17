@@ -1,4 +1,4 @@
-package com.react.sextant;
+package com.github.react.sextant;
 
 import android.util.Log;
 

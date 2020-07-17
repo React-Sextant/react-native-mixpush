@@ -1,22 +1,23 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.huawei.agconnect'
 
-dependencies {
-
-    implementation 'com.huawei.hms:push:5.0.0.300'
-    compile "com.facebook.react:react-native:+"
-
+def safeExtGet(prop, fallback) {
+    rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
 }
 
 android {
-    compileSdkVersion rootProject.hasProperty('compileSdkVersion') ? rootProject.compileSdkVersion : 23
-    buildToolsVersion rootProject.hasProperty('buildToolsVersion') ? rootProject.buildToolsVersion : "23.0.1"
+    compileSdkVersion safeExtGet("compileSdkVersion", 28)
+    buildToolsVersion safeExtGet("buildToolsVersion", '28.0.3')
 
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion project.hasProperty('targetSdkVersion') ? project.targetSdkVersion : 22
+        minSdkVersion project.hasProperty('minSdkVersion') && project.minSdkVersion > 17 ? project.minSdkVersion : 17
+        targetSdkVersion safeExtGet('targetSdkVersion', 28)
         versionCode 1
-        versionName '0。1'
+        versionName '0.1'
     }
+}
 
+dependencies {
+    compileOnly 'com.facebook.react:react-native:+'
+    implementation 'com.huawei.hms:push:5.0.0.300'
 }

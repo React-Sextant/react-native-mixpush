@@ -1,0 +1,22 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.huawei.agconnect'
+
+dependencies {
+
+    implementation 'com.huawei.hms:push:5.0.0.300'
+    compile "com.facebook.react:react-native:+"
+
+}
+
+android {
+    compileSdkVersion rootProject.hasProperty('compileSdkVersion') ? rootProject.compileSdkVersion : 23
+    buildToolsVersion rootProject.hasProperty('buildToolsVersion') ? rootProject.buildToolsVersion : "23.0.1"
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion project.hasProperty('targetSdkVersion') ? project.targetSdkVersion : 22
+        versionCode 1
+        versionName '0。1'
+    }
+
+}
